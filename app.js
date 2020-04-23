@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // https://opengameart.org/content/day-cards
     // https://opengameart.org/content/night-cards
-    const cardArray = [
+    const cards = [
         {
             name: 'siren',
             img: 'images/Siren.svg'
@@ -26,40 +26,32 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             name: 'babyrednightdragon',
             img: 'images/BabyRedNightDragon.svg'
-        },
-        {
-            name: 'siren',
-            img: 'images/Siren.svg'
-        },
-        {
-            name: 'reddaydragon',
-            img: 'images/RedDayDragon.svg'
-        },
-        {
-            name: 'ratwarrior',
-            img: 'images/RatWarrior.svg'
-        },
-        {
-            name: 'cupidlancer',
-            img: 'images/CupidLancer.svg'
-        },
-        {
-            name: 'cupidarcher',
-            img: 'images/CupidArcher.svg'
-        },
-        {
-            name: 'babyrednightdragon',
-            img: 'images/BabyRedNightDragon.svg'
-        },
+        }
     ];
-
-    cardArray.sort(() => 0.5 - Math.random());
 
     const grid = document.querySelector('.grid');
     const resultDisplay = document.querySelector('#result');
+    const msg = document.querySelector('.info-msg');
+    let cardArray = [];
     let cardsChoosen = [];
     let cardsChoosenId = [];
     let cardsWon = [];
+
+    const load = () => {
+        // preload and create images
+        cardArray = cards.map((value) => {
+            const img = new Image();
+            img.src = value.img;
+            value.image = img;
+
+            return value;
+        });
+
+        cardArray = [...cardArray, ...cardArray];
+        cardArray.sort(() => 0.5 - Math.random());
+
+        createBoard();
+    };
 
     const createBoard = () => {
         for (let i = 0; i < cardArray.length; i++) {
@@ -77,21 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const optionTwoId = cardsChoosenId[1];
 
         if (cardsChoosen[0] === cardsChoosen[1]) {
-            alert('Match');
-            cards[optionOneId].setAttribute('src', 'images/Night.svg');
-            cards[optionTwoId].setAttribute('src', 'images/Night.svg');
-            cardsWon.push(cardsChoosen);
+            msg.textContent = 'Match';
+            cards[optionOneId].classList.add('match');
+            cards[optionTwoId].classList.add('match');
+            cardsWon.push(cardsChoosen[0]);
         } else {
             cards[optionOneId].setAttribute('src', 'images/Day.svg');
             cards[optionTwoId].setAttribute('src', 'images/Day.svg');
-            alert('Try again');
         }
         cardsChoosen = [];
         cardsChoosenId = [];
         resultDisplay.textContent = cardsWon.length;
 
         if (cardsWon.length === cardArray.length / 2) {
-            resultDisplay.textContent = 'Congratulations! You found all!';
+            msg.textContent = 'Congratulations! You found all!';
         }
     };
 
@@ -101,9 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChoosenId.push(cardId);
         evt.target.setAttribute('src', cardArray[cardId].img);
         if (cardsChoosenId.length === 2) {
-            setTimeout(checkForMatch, 500);
+            setTimeout(checkForMatch, 1000);
         }
     };
 
-    createBoard();
+    load();
 });

@@ -8,3 +8,13 @@
 .grid img {
     width: 100px;
 }
+
+.match {
+    opacity: 0.5;
+}
+
+.info-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+}

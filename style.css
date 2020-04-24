@@ -1,7 +1,11 @@
-.grid {
+.container {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    height: 300px;
+    flex-direction: column;
+}
+.grid {
+    height: 432px;
     width: 400px;
 }
 

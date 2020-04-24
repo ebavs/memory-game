@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 3. Scoring!
     // 4. cambio arquitectura?
-    // 5. cardswon const?
 
     // https://opengameart.org/content/day-cards
     // https://opengameart.org/content/night-cards
@@ -39,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let cardArray = [];
     let cardsChoosen = [];
     let cardsChoosenId = [];
+    let clickScore = 100;
+    let totalScore = 0;
     const cardsWon = [];
 
     const load = () => {
@@ -78,15 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[optionOneId].classList.add('match');
             cards[optionTwoId].classList.add('match');
             cardsWon.push(cardsChoosen[0]);
+            totalScore += clickScore;
         } else {
             cards[optionOneId].setAttribute('src', 'images/Day.svg');
             cards[optionOneId].addEventListener('click', e => flipCard(e), { once: true });
             cards[optionTwoId].setAttribute('src', 'images/Day.svg');
             cards[optionTwoId].addEventListener('click', e => flipCard(e), { once: true });
         }
+
         cardsChoosen = [];
         cardsChoosenId = [];
-        resultDisplay.textContent = cardsWon.length;
+
+        resultDisplay.textContent = totalScore;
+        clickScore = Math.ceil(clickScore / 1.5);
 
         if (cardsWon.length === cardArray.length / 2) {
             msg.textContent = 'Congratulations! You found all!';

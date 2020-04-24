@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let cardArray = [];
     let cardsChoosen = [];
     let cardsChoosenId = [];
-    let cardsWon = [];
+    const cardsWon = [];
 
     const load = () => {
         // preload and create images

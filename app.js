@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. funcion para hide msg, posible difuminado
-    // 2. eliminar evento click y reasignar
     // 3. Scoring!
     // 4. cambio arquitectura?
     // 5. cardswon const?
@@ -64,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let card = document.createElement('img');
             card.setAttribute('src', 'images/Day.svg');
             card.setAttribute('data-id', i);
-            card.addEventListener('click', e => flipCard(e));
+            card.addEventListener('click', e => flipCard(e), { once: true });
             grid.appendChild(card);
         }
     };
@@ -82,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cardsWon.push(cardsChoosen[0]);
         } else {
             cards[optionOneId].setAttribute('src', 'images/Day.svg');
+            cards[optionOneId].addEventListener('click', e => flipCard(e), { once: true });
             cards[optionTwoId].setAttribute('src', 'images/Day.svg');
+            cards[optionTwoId].addEventListener('click', e => flipCard(e), { once: true });
         }
         cardsChoosen = [];
         cardsChoosenId = [];
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cardsChoosenId.push(cardId);
         evt.target.setAttribute('src', cardArray[cardId].img);
         if (cardsChoosenId.length === 2) {
-            setTimeout(checkForMatch, 1000);
+            setTimeout(checkForMatch, 500);
         }
     };
 

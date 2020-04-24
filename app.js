@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // 1. funcion para hide msg, posible difuminado
+    // 2. eliminar evento click y reasignar
+    // 3. Scoring!
+    // 4. cambio arquitectura?
+    // 5. cardswon const?
+
     // https://opengameart.org/content/day-cards
     // https://opengameart.org/content/night-cards
     const cards = [
@@ -70,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cardsChoosen[0] === cardsChoosen[1]) {
             msg.textContent = 'Match';
+            msgShow();
             cards[optionOneId].classList.add('match');
             cards[optionTwoId].classList.add('match');
             cardsWon.push(cardsChoosen[0]);
@@ -83,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cardsWon.length === cardArray.length / 2) {
             msg.textContent = 'Congratulations! You found all!';
+        } else {
+            msgHide();
         }
     };
 
@@ -94,6 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cardsChoosenId.length === 2) {
             setTimeout(checkForMatch, 1000);
         }
+    };
+
+    const msgShow = () => {
+        msg.classList.remove('hide');
+        msg.classList.add('show')
+    };
+
+    const msgHide = () => {
+        setTimeout(() => {
+            msg.classList.remove('show');
+            msg.classList.add('hide');
+        }, 1000);
     };
 
     load();

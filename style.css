@@ -18,3 +18,16 @@
     justify-content: space-between;
     width: 400px;
 }
+
+.show {
+    visibility: visible;
+    opacity: 1;
+
+    transition-delay: 0s;
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+}

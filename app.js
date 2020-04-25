@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 4. cambio arquitectura?
-
     // https://opengameart.org/content/day-cards
     // https://opengameart.org/content/night-cards
     const cards = [
